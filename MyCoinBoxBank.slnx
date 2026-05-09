@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="MyCoinBoxBank.Android/MyCoinBoxBank.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="MyCoinBoxBank.Browser/MyCoinBoxBank.Browser.csproj" />
+  <Project Path="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
+  <Project Path="MyCoinBoxBank.iOS/MyCoinBoxBank.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="MyCoinBoxBank/MyCoinBoxBank.csproj" />
+</Solution>
