@@ -3,12 +3,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:MyCoinBoxBank.ViewModels"
+             xmlns:views="clr-namespace:MyCoinBoxBank.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MyCoinBoxBank.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <vm:MainViewModel />
-  </Design.DataContext>
-
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="{x:Type vm:SplashViewModel}">
+            <views:SplashView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:NavigationBarViewModel}">
+            <views:NavigationBarView/>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <TransitioningContentControl Content="{Binding CurrentView}"/>
 </UserControl>

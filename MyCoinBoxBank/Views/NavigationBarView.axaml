@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="using:MyCoinBoxBank.Views"
+             x:Class="MyCoinBoxBank.Views.NavigationBarView">
+    
+    <TabControl TabStripPlacement="Bottom" HorizontalAlignment="Stretch">
+        <TabItem Header="Home" FontSize="16">
+            <views:HomeView/>
+        </TabItem>
+
+        <TabItem Header="Coins" FontSize="16">
+            <Grid Background="#282A36">
+                <TextBlock Text="Coin Acceptor Status &amp; Logs" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Stats" FontSize="16">
+            <Grid Background="#282A36">
+                <TextBlock Text="System Analytics" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Settings" FontSize="16">
+            <Grid Background="#282A36">
+                <TextBlock Text="Configuration" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </TabItem>
+        
+    </TabControl>
+</UserControl>
