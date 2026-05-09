@@ -3,7 +3,9 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="MyCoinBoxBank/App.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/MainView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
+        <entry key="MyCoinBoxBank/Views/MainWindow.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
       </map>
     </option>
   </component>
