@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              d:DesignWidth="500"
-             d:DesignHeight="800"
+             d:DesignHeight="1000"
              x:Class="MyCoinBoxBank.Views.HomeView">
 
     <Grid Background="#FFFFFF" RowDefinitions="Auto,*,Auto,*">
@@ -27,19 +27,38 @@
                            FontWeight="SemiBold"/>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Row="2" Margin="30">
+        <Grid Grid.Row="2" Margin="10, 0, 10, 12">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                <Button Grid.Column="0" Width="200" Height="200">
-                    <TextBlock Text="Insert Money/Coins" 
-                               VerticalAlignment="Center" 
+                <Button Grid.Column="0" Height="200"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center">
+                    <TextBlock Text="Insert&#x0a;Money/Coins"
+                               TextAlignment="Center" 
+                               VerticalAlignment="Center"
                                HorizontalAlignment="Center"/>
                 </Button>
-                <Button Grid.Column="1" Width="200" Height="200">
-                    <TextBlock Text="Withdraw Money/Coins" 
+                <Button Grid.Column="1" Height="200"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center">
+                    <TextBlock Text="Withdraw&#x0a;Money/Coins" 
+                               TextAlignment="Center"
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Center"/>
                 </Button>
             </Grid>
+        </Grid>
+        <StackPanel Grid.Row="3">
+            <Grid ColumnDefinitions="*, *">
+                <Grid Grid.Column="0">
+                    <TextBlock Text="History"></TextBlock>
+                </Grid>
+            </Grid>
+            <Border Height="10"
+                    Margin="20"
+                    Background="#d9d9d9"
+                    HorizontalAlignment="Stretch">
+                
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>
