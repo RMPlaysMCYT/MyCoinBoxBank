@@ -4,27 +4,36 @@
              x:Class="MyCoinBoxBank.Views.NavigationBarView">
     
     <TabControl TabStripPlacement="Bottom" HorizontalAlignment="Stretch">
-        <TabItem Header="Home" FontSize="16">
+        <TabItem FontSize="20" Width="120" Height="50">
+            <TabItem.Header>
+                <TextBlock Text="Home" HorizontalAlignment="Center" >
+                </TextBlock>
+                </TabItem.Header>
             <views:HomeView/>
         </TabItem>
 
-        <TabItem Header="Coins" FontSize="16">
-            <Grid Background="#282A36">
-                <TextBlock Text="Coin Acceptor Status &amp; Logs" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
+        <TabItem FontSize="20" Width="120" Height="50">
+            <TabItem.Header>
+                <TextBlock Text="Coins" HorizontalAlignment="Center" >
+                </TextBlock>
+            </TabItem.Header>
+            <views:CoinsView/>
         </TabItem>
 
-        <TabItem Header="Stats" FontSize="16">
-            <Grid Background="#282A36">
-                <TextBlock Text="System Analytics" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
+        <TabItem FontSize="20" Width="120" Height="50">
+            <TabItem.Header>
+                <TextBlock Text="Stats" HorizontalAlignment="Center" >
+                </TextBlock>
+            </TabItem.Header>
+            <views:StatsView/>
         </TabItem>
 
-        <TabItem Header="Settings" FontSize="16">
-            <Grid Background="#282A36">
-                <TextBlock Text="Configuration" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
+        <TabItem FontSize="20" Width="120" Height="50">
+            <TabItem.Header>
+                <TextBlock Text="Settings" HorizontalAlignment="Center" >
+                </TextBlock>
+            </TabItem.Header>
+            <views:SettingsView/>
         </TabItem>
-        
     </TabControl>
 </UserControl>
