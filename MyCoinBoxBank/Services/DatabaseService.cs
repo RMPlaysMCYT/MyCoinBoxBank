@@ -49,6 +49,21 @@ public class DatabaseService : IDatabaseService
         return coins.Sum(c => c.Value * c.Count);
     }
 
+    public Task<List<Transaction>> GetTransactionsAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AddTransactionAsync(Transaction transaction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateCoinAsync(Coin coin)
+    {
+        throw new NotImplementedException();
+    }
+
     private async Task EnsureInit()
     {
         if (_db is null) await InitializeAsync();
