@@ -14,15 +14,18 @@ public class DatabaseService : IDatabaseService
 
     public DatabaseService()
     {
-        _dbPath = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MyCoinBoxBank.db"); 
+        _dbPath = Path.Combine(
+            Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), 
+            "MyCoinBoxBank.db"); 
     }
 
     public async Task InitializeAsync()
     {
         if (_db is not null) return;
         _db = new SQLiteAsyncConnection(_dbPath);
-        await _db.CreateTableAsync<Transaction>();
         await _db.CreateTableAsync<Coin>();
+        await _db.CreateTableAsync<Transaction>();
         
         var coins = await _db.Table<Coin>().ToListAsync();
         if (coins.Count == 0)
@@ -37,10 +40,10 @@ public class DatabaseService : IDatabaseService
         }
     }
 
-    public Task<List<Coin>> GetCoinsAsync()
+    public async Task<List<Coin>> GetCoinsAsync()
     {
         await EnsureInit();
-        return await _db.Table<Coin>().ToListAsync();
+        return await _db!.Table<Coin>().ToListAsync();
     }
     
     public async Task<decimal> GetTotalBalanceAsync()
@@ -49,23 +52,25 @@ public class DatabaseService : IDatabaseService
         return coins.Sum(c => c.Value * c.Count);
     }
 
-    public Task<List<Transaction>> GetTransactionsAsync()
+    public async Task<List<Transaction>> GetTransactionsAsync()
     {
         await EnsureInit();
-        return await _db.Table<Transaction>()
+        return await _db!.Table<Transaction>()
             .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
-    public Task AddTransactionAsync(Transaction transaction)
+    public async Task AddTransactionAsync(Transaction transaction)
     {
         await EnsureInit();
-        return _db.InsertAsync(transaction);
+        await _db!.InsertAsync(transaction);
     }
 
-    public Task UpdateCoinAsync(Coin coin)
+    public async Task UpdateCoinAsync(Coin coin)
     {
-        throw new NotImplementedException();
+        await EnsureInit();
+        coin.LastUpdated = DateTime.Now;
+        await _db!.UpdateAsync(coin);
     }
 
     private async Task EnsureInit()
