@@ -28,8 +28,7 @@ public partial class InsertCoinViewModel : ObservableObject
         IsBusy = true;
         StatusMessage = "Connecting to the server";
 
-        var triggered = await esp32Service.TriggerInsertAsync();
-
+        var triggered = await esp32Service.TriggerInsertAsync(); 
         if (triggered){
             await _db.AddTransactionAsync(new Transaction
             {
