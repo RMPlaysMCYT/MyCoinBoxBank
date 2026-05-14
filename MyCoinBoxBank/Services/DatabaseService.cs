@@ -43,7 +43,7 @@ public class DatabaseService : IDatabaseService
         return await _db.Table<Coin>().ToListAsync();
     }
     
-    public async Task<List<decimal>> GetTotalBalanceAsync()
+    public async Task<decimal> GetTotalBalanceAsync()
     {
         var coins = await GetCoinsAsync();
         return coins.Sum(c => c.Value * c.Count);
@@ -51,12 +51,16 @@ public class DatabaseService : IDatabaseService
 
     public Task<List<Transaction>> GetTransactionsAsync()
     {
-        throw new NotImplementedException();
+        await EnsureInit();
+        return await _db.Table<Transaction>()
+            .OrderByDescending(t => t.CreatedAt)
+            .ToListAsync();
     }
 
     public Task AddTransactionAsync(Transaction transaction)
     {
-        throw new NotImplementedException();
+        await EnsureInit();
+        return _db.InsertAsync(transaction);
     }
 
     public Task UpdateCoinAsync(Coin coin)
