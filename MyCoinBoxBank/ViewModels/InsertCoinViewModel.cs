@@ -23,9 +23,33 @@ public partial class InsertCoinViewModel : ObservableObject
         _esp32Service = esp32Service;
     }
 
-    public async Task InserCoins()
+    public async Task InsertCoins()
     {
-        
+        IsBusy = true;
+        StatusMessage = "Connecting to the server";
+
+        var triggered = await esp32Service.TriggerInsertAsync();
+
+        if (triggered){
+            await _db.AddTransactionAsync(new Transaction
+            {
+                Type = TransactionType.Insert,
+                Amount = SelectedAmount,
+                Notes = "Inserted via App"
+
+            });
+            StatusMessage = $"Inserted ${SelectedAmount:0.00} successfully";
+        } else {
+            await _db.AddTransactionAsync(new Transaction
+            {
+                Type = TransactionType.Insert,
+                Amount = SelectedAmount,
+                Notes = "Offline Insert - ESP32 not Reached"
+
+            });
+            StatusMessage = "ESP32 offline, Logged Locally";
+        }
+        IsBusy = false;
     }
 }
 
