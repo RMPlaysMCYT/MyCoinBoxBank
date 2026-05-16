@@ -16,7 +16,7 @@ public class DatabaseService : IDatabaseService
     {
         _dbPath = Path.Combine(
             Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), 
+                Environment.SpecialFolder.LocalApplicationData), 
             "MyCoinBoxBank.db"); 
     }
 

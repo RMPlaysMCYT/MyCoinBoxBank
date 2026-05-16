@@ -6,7 +6,7 @@ using MyCoinBoxBank.Models;
 using MyCoinBoxBank.Services;
 using MyCoinBoxBank.ViewModels;
 
-namespace MyCoinBank.ViewModels;
+namespace MyCoinBoxBank.ViewModels;
 
 public partial class InsertCoinViewModel : ObservableObject
 {
@@ -22,7 +22,8 @@ public partial class InsertCoinViewModel : ObservableObject
         _db = db;
         _esp32Service = esp32Service;
     }
-
+    
+    [RelayCommand]
     public async Task InsertCoins()
     {
         IsBusy = true;
