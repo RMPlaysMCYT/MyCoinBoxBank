@@ -13,8 +13,8 @@ public partial class InsertCoinViewModel : ObservableObject
     private readonly IDatabaseService _db;
     private readonly Esp32Service _esp32Service;
 
-    [ObservableProperty] private string _statusMessage = "Raedy";
-    [ObservableProperty] private bool _isBusy = "False";
+    [ObservableProperty] private string _statusMessage = "Ready";
+    [ObservableProperty] private bool _isBusy = false;
     [ObservableProperty] private decimal _selectedAmount = 1.00m;
 
     public InsertCoinViewModel(IDatabaseService db, Esp32Service esp32Service)
@@ -28,7 +28,7 @@ public partial class InsertCoinViewModel : ObservableObject
         IsBusy = true;
         StatusMessage = "Connecting to the server";
 
-        var triggered = await esp32Service.TriggerInsertAsync(); 
+        var triggered = await _esp32Service.TriggerInsertAsync(); 
         if (triggered){
             await _db.AddTransactionAsync(new Transaction
             {
