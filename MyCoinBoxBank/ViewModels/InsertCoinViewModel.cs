@@ -49,14 +49,15 @@ public partial class InsertCoinViewModel : ObservableObject
 
         if (started)
         {
+            IsSessionActive = true;
+            IsWaitingForCoin = true;
             StatusMessage = "Please insert a coin now...";
             StartPolling();
         }
         else
         {
-            // ESP32 offline — still open popup but log as offline
-            StatusMessage    = "ESP32 offline — session running locally";
-            IsSessionActive  = true;
+            StatusMessage = "The machine is offline.";
+            IsSessionActive = false;
             IsWaitingForCoin = false;
         }
     }

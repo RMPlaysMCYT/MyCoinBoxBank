@@ -33,9 +33,9 @@ public class DatabaseService : IDatabaseService
             await _db.InsertAllAsync(new List<Coin>
             {
                 new Coin { Denomination = "1.00", Value = 1.00m, Count = 0 },
-                new Coin { Denomination = "0.25", Value = 0.25m, Count = 0 },
-                new Coin { Denomination = "0.10", Value = 0.10m, Count = 0 },
-                new Coin { Denomination = "0.05", Value = 0.05m, Count = 0 },
+                new Coin { Denomination = "5.00", Value = 5.00m, Count = 0 },
+                new Coin { Denomination = "10.00", Value = 10.00m, Count = 0 },
+                new Coin { Denomination = "20.00", Value = 20.00m, Count = 0 },
             });
         }
     }

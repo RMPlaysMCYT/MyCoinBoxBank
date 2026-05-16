@@ -7,7 +7,7 @@ namespace MyCoinBoxBank.Services;
 public class Esp32Service : IESP32Service
 {
     private readonly HttpClient _http;
-    public string Esp32IpAddress { get; set; } = "";
+    public string Esp32IpAddress { get; set; } = "192.168.4.1";
 
     public Esp32Service()
     {
