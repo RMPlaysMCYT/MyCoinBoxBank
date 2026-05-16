@@ -1,0 +1,169 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyCoinBoxBank.ViewModels"
+             x:Class="MyCoinBoxBank.Views.InsertCoinView"
+             x:DataType="vm:InsertCoinViewModel">
+
+    <Grid Background="#FFFFFF">
+
+        <!-- Default state: just the Insert Coin button -->
+        <StackPanel IsVisible="{Binding !IsSessionActive}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="16">
+
+            <TextBlock Text="💰"
+                       FontSize="64"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Ready to insert coins"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding StatusMessage}"
+                       FontSize="14"
+                       Opacity="0.6"
+                       HorizontalAlignment="Center"/>
+
+            <Button Content="Insert Coin"
+                    Command="{Binding OpenCoinSlotCommand}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Height="56"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Background="#ee2d2e"
+                    Foreground="White"
+                    CornerRadius="12"
+                    Margin="0,8,0,0"/>
+        </StackPanel>
+
+        <!-- Active session popup overlay -->
+        <Grid IsVisible="{Binding IsSessionActive}"
+              RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+            <!-- Header -->
+            <TextBlock Grid.Row="0"
+                       Text="Insert Coins"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Margin="16,16,16,4"/>
+
+            <!-- Big total display -->
+            <Border Grid.Row="1"
+                    Background="#1a1a2e"
+                    CornerRadius="16"
+                    Margin="16,8"
+                    Padding="24,20">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Total Inserted"
+                               Foreground="#aaaaaa"
+                               FontSize="14"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding SessionTotalDisplay}"
+                               Foreground="#FFFFFF"
+                               FontSize="52"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+
+                    <!-- Waiting for coin indicator -->
+                    <StackPanel IsVisible="{Binding IsWaitingForCoin}"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Spacing="8">
+                        <TextBlock Text="Waiting for coin..."
+                                   Foreground="#aaaaaa"
+                                   FontSize="13"/>
+                    </StackPanel>
+
+                    <!-- Idle countdown -->
+                    <StackPanel IsVisible="{Binding !IsWaitingForCoin}" Spacing="4">
+                        <TextBlock Text="{Binding TimerSeconds, StringFormat='Auto-save in {0}s'}"
+                                   Foreground="#aaaaaa"
+                                   FontSize="13"
+                                   HorizontalAlignment="Center"/>
+                        <ProgressBar Value="{Binding TimerSeconds}"
+                                     Maximum="10"
+                                     Height="6"
+                                     CornerRadius="3"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Coin breakdown -->
+            <Border Grid.Row="2"
+                    Background="#F5F5F5"
+                    CornerRadius="12"
+                    Margin="16,0,16,8"
+                    Padding="16,10">
+                <Grid ColumnDefinitions="*,*,*,*">
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                        <TextBlock Text="₱1"  FontSize="13" HorizontalAlignment="Center" Opacity="0.6"/>
+                        <TextBlock Text="{Binding Count1Peso}"  FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                        <TextBlock Text="₱5"  FontSize="13" HorizontalAlignment="Center" Opacity="0.6"/>
+                        <TextBlock Text="{Binding Count5Peso}"  FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <TextBlock Text="₱10" FontSize="13" HorizontalAlignment="Center" Opacity="0.6"/>
+                        <TextBlock Text="{Binding Count10Peso}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                        <TextBlock Text="₱20" FontSize="13" HorizontalAlignment="Center" Opacity="0.6"/>
+                        <TextBlock Text="{Binding Count20Peso}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Coin slot image/icon area -->
+            <Border Grid.Row="3"
+                    Background="#F9F9F9"
+                    CornerRadius="16"
+                    Margin="16,0"
+                    HorizontalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Text="🪙"
+                               FontSize="72"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding StatusMessage}"
+                               FontSize="15"
+                               Opacity="0.7"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="16,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Done / Cancel -->
+            <Grid Grid.Row="4"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="12"
+                  Margin="16,12,16,24">
+                <Button Grid.Column="0"
+                        Content="Cancel"
+                        Command="{Binding CancelCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Height="52"
+                        FontSize="16"
+                        Background="#EEEEEE"
+                        CornerRadius="12"/>
+                <Button Grid.Column="1"
+                        Content="Done ✓"
+                        Command="{Binding DoneCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Height="52"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Background="#ee2d2e"
+                        Foreground="White"
+                        CornerRadius="12"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

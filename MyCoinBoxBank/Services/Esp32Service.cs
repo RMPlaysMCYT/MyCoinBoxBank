@@ -11,34 +11,34 @@ public class Esp32Service : IESP32Service
 
     public Esp32Service()
     {
-        _http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+        _http = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
     }
 
-    public async Task<bool> TriggerInsertAsync()
-    {
-        return await SendCommand("/insert");
-    }
-    public async Task<bool> TriggerWithdrawAsync()
-    {
-        return await SendCommand("/withdraw");
-    }
+    public async Task<bool> StartCoinAcceptorAsync() => await SendCommand("/start");
+    public async Task<bool> StopCoinAcceptorAsync()  => await SendCommand("/stop");
+    public async Task<bool> PingAsync()               => await SendCommand("/ping");
 
-    public async Task<bool> PingAsync()
+    public async Task<decimal> GetLastCoinAsync()
     {
-        return await SendCommand("/ping");
+        if (string.IsNullOrWhiteSpace(Esp32IpAddress)) return 0;
+        try
+        {
+            var raw = await _http.GetStringAsync($"http://{Esp32IpAddress}/lastcoin");
+            if (int.TryParse(raw.Trim(), out var centavos) && centavos > 0)
+                return centavos / 100m; // convert centavos to pesos
+            return 0;
+        }
+        catch { return 0; }
     }
 
     private async Task<bool> SendCommand(string endpoint)
     {
+        if (string.IsNullOrWhiteSpace(Esp32IpAddress)) return false;
         try
         {
             var response = await _http.GetAsync($"http://{Esp32IpAddress}{endpoint}");
             return response.IsSuccessStatusCode;
         }
-        catch
-        {
-            return false;
-        }
+        catch { return false; }
     }
 }
-

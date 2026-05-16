@@ -4,8 +4,9 @@ namespace MyCoinBoxBank.Services;
 
 public interface IESP32Service
 {
-    Task<bool> TriggerInsertAsync();
-    Task<bool> TriggerWithdrawAsync();
+    Task<bool> StartCoinAcceptorAsync();
+    Task<bool> StopCoinAcceptorAsync();
+    Task<decimal> GetLastCoinAsync(); // returns 0 if no coin yet
     Task<bool> PingAsync();
     string Esp32IpAddress { get; set; }
 }

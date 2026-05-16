@@ -2,63 +2,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MyCoinBoxBank.ViewModels"
              mc:Ignorable="d"
              d:DesignWidth="500"
              d:DesignHeight="1000"
-             x:Class="MyCoinBoxBank.Views.HomeView">
+             x:Class="MyCoinBoxBank.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
 
-    <Grid Background="#FFFFFF" RowDefinitions="Auto,*,Auto,*">
-        <TextBlock Grid.Row="0"
-                   Text="MyCoinBank"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   Margin="12,10,12,0"/>
+    <Grid Background="#FFFFFF" RowDefinitions="Auto,Auto,Auto,*">
 
-        <StackPanel Grid.Row="1"
-                    Margin="12"
-                    Spacing="12">
-            <Border Height="256"
-                    Background="#D9D9D9"
-                    CornerRadius="16"
+        <!-- Title + device status -->
+        <StackPanel Grid.Row="0" Margin="12,10,12,0" Spacing="2">
+            <TextBlock Text="MyCoinBank"
+                       FontSize="32"
+                       FontWeight="Bold"/>
+            <TextBlock Text="{Binding DeviceStatus}"
+                       FontSize="13"
+                       Opacity="0.6"/>
+        </StackPanel>
+
+        <!-- Balance card -->
+        <Border Grid.Row="1"
+                Margin="12,10,12,0"
+                Height="200"
+                Background="#1a1a2e"
+                CornerRadius="16"
+                HorizontalAlignment="Stretch"
+                Padding="20">
+            <StackPanel Spacing="8" VerticalAlignment="Center">
+                <TextBlock Text="Total Balance"
+                           Foreground="#aaaaaa"
+                           FontSize="14"/>
+                <TextBlock Text="{Binding BalanceDisplay}"
+                           Foreground="White"
+                           FontSize="42"
+                           FontWeight="Bold"/>
+                <TextBlock Text="{Binding DeviceStatus}"
+                           Foreground="#aaaaaa"
+                           FontSize="12"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Action buttons -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="12"
+              Margin="12,12,12,0">
+            <Button Grid.Column="0"
+                    Command="{Binding OpenInsertCoinCommand}"
+                    Height="160"
                     HorizontalAlignment="Stretch"
-                    Padding="16">
-                <TextBlock Text="Balance"
-                           FontSize="20"
-                           FontWeight="SemiBold"/>
-            </Border>
-        </StackPanel>
-        <Grid Grid.Row="2" Margin="10, 0, 10, 12">
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                <Button Grid.Column="0" Height="200"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center">
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    CornerRadius="14">
+                <StackPanel HorizontalAlignment="Center" Spacing="8">
+                    <TextBlock Text="💰" FontSize="36" HorizontalAlignment="Center"/>
                     <TextBlock Text="Insert&#x0a;Money/Coins"
-                               TextAlignment="Center" 
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"/>
-                </Button>
-                <Button Grid.Column="1" Height="200"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center">
-                    <TextBlock Text="Withdraw&#x0a;Money/Coins" 
                                TextAlignment="Center"
-                               VerticalAlignment="Center" 
-                               HorizontalAlignment="Center"/>
-                </Button>
-            </Grid>
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="1"
+                    Command="{Binding OpenWithdrawCommand}"
+                    Height="160"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    CornerRadius="14">
+                <StackPanel HorizontalAlignment="Center" Spacing="8">
+                    <TextBlock Text="🏧" FontSize="36" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Withdraw&#x0a;Money/Coins"
+                               TextAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
         </Grid>
-        <StackPanel Grid.Row="3">
-            <Grid ColumnDefinitions="*, *">
-                <Grid Grid.Column="0">
-                    <TextBlock Text="History"></TextBlock>
-                </Grid>
-            </Grid>
-            <Border Height="10"
-                    Margin="20"
-                    Background="#d9d9d9"
-                    HorizontalAlignment="Stretch">
-                
+
+        <!-- History -->
+        <Grid Grid.Row="3" RowDefinitions="Auto,*" Margin="12,16,12,12">
+            <TextBlock Grid.Row="0"
+                       Text="History"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,8"/>
+            <Border Grid.Row="1"
+                    Background="#F5F5F5"
+                    CornerRadius="16"
+                    Padding="24">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="6">
+                    <TextBlock Text="📭" FontSize="40" HorizontalAlignment="Center"/>
+                    <TextBlock Text="No history yet"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Insert coins to get started"
+                               FontSize="13"
+                               Opacity="0.6"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
             </Border>
-        </StackPanel>
+        </Grid>
+
     </Grid>
 </UserControl>

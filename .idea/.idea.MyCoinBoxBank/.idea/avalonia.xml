@@ -7,6 +7,7 @@
         <entry key="MyCoinBoxBank/Views/CoinsView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/HomeView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/HomeView.xaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
+        <entry key="MyCoinBoxBank/Views/InserCoinView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/MainView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/MainWindow.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
         <entry key="MyCoinBoxBank/Views/NavigationBarView.axaml" value="MyCoinBoxBank.Desktop/MyCoinBoxBank.Desktop.csproj" />
