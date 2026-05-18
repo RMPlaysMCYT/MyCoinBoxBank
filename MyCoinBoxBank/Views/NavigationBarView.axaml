@@ -1,39 +1,77 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="using:MyCoinBoxBank.Views"
-             x:Class="MyCoinBoxBank.Views.NavigationBarView">
-    
-    <TabControl TabStripPlacement="Bottom" HorizontalAlignment="Stretch">
-        <TabItem FontSize="20" Width="120" Height="50">
-            <TabItem.Header>
-                <TextBlock Text="Home" HorizontalAlignment="Center" >
-                </TextBlock>
+             xmlns:vm="using:MyCoinBoxBank.ViewModels"
+             x:Class="MyCoinBoxBank.Views.NavigationBarView"
+             x:DataType="vm:NavigationBarViewModel">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Offline Banner -->
+        <Border Grid.Row="0"
+                IsVisible="{Binding ShowOfflineBanner}"
+                Background="#FF4444"
+                Padding="12,8"
+                VerticalAlignment="Top"
+                ZIndex="100">
+            <TextBlock Text="{Binding OfflineMessage}"
+                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Main TabControl -->
+        <TabControl Grid.Row="0"
+                    SelectedIndex="{Binding SelectedTabIndex}"
+                    TabStripPlacement="Bottom"
+                    HorizontalAlignment="Stretch">
+
+            <!-- Tab 0: Home -->
+            <TabItem FontSize="20" Width="80" Height="50">
+                <TabItem.Header>
+                    <TextBlock Text="Home" HorizontalAlignment="Center"/>
                 </TabItem.Header>
-            <views:HomeView/>
-        </TabItem>
+                <views:HomeView DataContext="{Binding HomeVMDL}"/>
+            </TabItem>
 
-        <TabItem FontSize="20" Width="120" Height="50">
-            <TabItem.Header>
-                <TextBlock Text="Coins" HorizontalAlignment="Center" >
-                </TextBlock>
-            </TabItem.Header>
-            <views:CoinsView/>
-        </TabItem>
+            <!-- Tab 1: Coins -->
+            <TabItem FontSize="20" Width="80" Height="50">
+                <TabItem.Header>
+                    <TextBlock Text="Coins" HorizontalAlignment="Center"/>
+                </TabItem.Header>
+                <views:CoinsView/>
+            </TabItem>
 
-        <TabItem FontSize="20" Width="120" Height="50">
-            <TabItem.Header>
-                <TextBlock Text="Stats" HorizontalAlignment="Center" >
-                </TextBlock>
-            </TabItem.Header>
-            <views:StatsView/>
-        </TabItem>
+            <!-- Tab 2: Stats -->
+            <TabItem FontSize="20" Width="80" Height="50">
+                <TabItem.Header>
+                    <TextBlock Text="Stats" HorizontalAlignment="Center"/>
+                </TabItem.Header>
+                <views:StatsView/>
+            </TabItem>
 
-        <TabItem FontSize="20" Width="120" Height="50">
-            <TabItem.Header>
-                <TextBlock Text="Settings" HorizontalAlignment="Center" >
-                </TextBlock>
-            </TabItem.Header>
-            <views:SettingsView/>
-        </TabItem>
-    </TabControl>
+            <!-- Tab 3: Settings -->
+            <TabItem FontSize="20" Width="80" Height="50">
+                <TabItem.Header>
+                    <TextBlock Text="Settings" HorizontalAlignment="Center"/>
+                </TabItem.Header>
+                <views:SettingsView/>
+            </TabItem>
+
+            <!-- Tab 4: Insert Coin (hidden tab, navigated to programmatically) -->
+            <TabItem Width="0" Height="0" IsVisible="False">
+                <views:InsertCoinView DataContext="{Binding InsertCoinVM}"/>
+            </TabItem>
+
+            <!-- Tab 5: Withdraw (hidden tab, navigated to programmatically) -->
+            <TabItem Width="0" Height="0" IsVisible="False">
+                <!-- Add your WithdrawView here when ready -->
+                <Grid>
+                    <TextBlock Text="Withdraw" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
 </UserControl>
